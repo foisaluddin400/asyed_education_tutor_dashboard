@@ -4,7 +4,7 @@ import create from "../../assets/routerImg/create.png";
 import settings from "../../assets/routerImg/settings.png";
 import subscription from "../../assets/routerImg/subscription.png";
 import user from "../../assets/routerImg/user.png";
-import logo from "../../assets/header/logo.png";
+import logo from "../../assets/header/logo1.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { FaChevronRight, FaHome } from "react-icons/fa";
@@ -14,92 +14,35 @@ import { useDispatch } from "react-redux";
 import { FiUser } from "react-icons/fi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { TbCategory2 } from "react-icons/tb";
-import items from "../item.json";
-const icons = {
-  FaHome,
-  FiUser,
-  TbCategory2,
-  IoSettingsOutline,
-};
+import { GrUserManager } from "react-icons/gr";
 
-// const items = [
-//   {
-//     key: "dashboard",
-//     label: "Dashboard",
-//     icon: <FaHome />,
-//     link: "/",
-//   },
-//   {
-//     key: "userManagement",
-//     label: "User Management",
-//     icon: <FiUser />,
-//     link: "/dashboard/UserManagement",
-//   },
+import { BiSolidInstitution } from "react-icons/bi";
+const items = [
+  {
+    key: "dashboard",
+    label: "Dashboard",
+    icon: < FaHome />,
+    link: "/"
+  },
 
-//     {
-//     key: "VendorManagement",
-//     label: "Vendor Management",
-//     icon: <FiUser />,
-//     link: "/dashboard/VendorManagement",
-//   },
-//   {
-//     key: "categoriesManagement",
-//     label: "Categories Management",
-//     icon: <TbCategory2 />,
-//     link: "/dashboard/CategoriesManagement/Categories",
-//     children: [
-//       {
-//         key: "categories",
-//         label: "Categories",
-//         link: "/dashboard/CategoriesManagement/Categories",
-//       },
-//       {
-//         key: "subcategory",
-//         label: "Subcategory",
-//         link: "/dashboard/CategoriesManagement/Subcategory",
-//       },
-//     ],
-//   },
-//   {
-//     key: "subscription",
-//     label: "Subscription",
-//     icon: <TbCategory2 />,
-//     link: "/dashboard/Subscription",
-//   },
-//   {
-//     key: "settings",
-//     label: "Settings",
-//     icon:<IoSettingsOutline />,
-//     link: "/dashboard/Settings/profile",
-//     children: [
-//       {
-//         key: "profile",
-//         label: "Profile",
-//         link: "/dashboard/Settings/profile",
-//       },
-//       {
-//         key: "terms",
-//         label: "Terms & Condition",
-//         link: "/dashboard/Settings/Terms&Condition",
-//       },
-//       {
-//         key: "privacy",
-//         label: "Privacy Policy",
-//         link: "/dashboard/Settings/PrivacyPolicy",
-//       },
-//       {
-//         key: "faq",
-//         label: "FAQ",
-//         link: "/dashboard/Settings/FAQ",
-//       },
-//       {
-//         key: "about",
-//         label: "About Us",
-//         link: "/dashboard/Settings/aboutUs",
-//       },
-//     ],
-//   },
-// ];
+
+   {
+    key: "childManagement",
+    label: "Child Management",
+    icon: <GrUserManager />,
+    link: "/dashboard/childManagement"
+  },
+ 
+  {
+    key: "tutionManagement",
+    label: "Tution Management",
+    icon: <BiSolidInstitution />,
+    link: "/dashboard/tutionManagement"
+  },
+ 
+  
+  
+];
 
 const SidBar = () => {
   const [selectedKey, setSelectedKey] = useState("dashboard");
@@ -152,9 +95,9 @@ const SidBar = () => {
   };
 
   return (
-    <div className="custom-sidebar h-[100vh] bg-[#18212b] text-gray-400">
-      <div className="custom-sidebar-logo flex justify-center">
-        <img src={logo} alt="Logo" className="w-[160px]" />
+   <div className="custom-sidebar h-[100vh] bg-[#004F44] text-white">
+      <div className="custom-sidebar-logo flex justify-center pb-6 pt-4">
+        <img src={logo} alt="Logo" className="w-[120px]" />
       </div>
       <div className="menu-items">
         {items.map((item) => {
@@ -169,7 +112,7 @@ const SidBar = () => {
           const isCategoriesActive =
             item.key === "categoriesManagement" &&
             item.children.some((child) => child.link === location.pathname);
-          const Icon = icons[item.icon];
+          
           return (
             <div key={item.key}>
               <Link
@@ -179,8 +122,8 @@ const SidBar = () => {
                   isSettingsActive ||
                   isCreatorActive ||
                   isCategoriesActive
-                    ? "bg-gradient-to-r from-[#6e1515] border-l-2 border-green-500 to-[#ffffff00] text-white  "
-                    : "  hover:bg-gradient-to-r hover:from-[#470e0e]"
+                    ? "bg-gradient-to-r from-[#ffb144] border-l-2 border-green-500 to-[#ffffff00] text-white  "
+                    : "  hover:bg-gradient-to-r hover:from-[#EF991F]"
                 }`}
                 onClick={(e) => {
                   if (item.children) {
@@ -191,9 +134,7 @@ const SidBar = () => {
                   }
                 }}
               >
-                <h1 className="w-5 mr-2">
-                  <Icon />
-                </h1>
+            <h1 className="w-4 mr-2">{item.icon}</h1>
 
                 <span className="block w-full ">{item.label}</span>
 
@@ -230,8 +171,8 @@ const SidBar = () => {
                           : "hover:bg-gradient-to-r hover:from-[#470e0e]"
                       }`}
                      onClick={() => {
-                        setSelectedKey(child.key); // শুধু selectedKey update হবে
-                        // setExpandedKeys([]); // এটা আর লাগবে না
+                        setSelectedKey(child.key); 
+                        
                       }}
                     >
                       <span className="block w-full ">{child.label}</span>
